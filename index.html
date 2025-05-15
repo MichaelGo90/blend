@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blend Coffee Price Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f7f8;
+      padding: 30px;
+      color: #333;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #2980b9;
+      color: white;
+    }
+
+    input[type="number"] {
+      width: 100px;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    button {
+      background-color: #27ae60;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #219150;
+    }
+
+    .total {
+      margin-top: 20px;
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Blend Coffee Price Calculator</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Coffee Type</th>
+    <th>Price per kg ($)</th>
+    <th>Blend (grams)</th>
+  </tr>
+  </thead>
+  <tbody id="coffeeTable">
+  <tr><td>اندونيسي ٤٥</td><td><input type="number" step="0.01" class="price" value="362"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>اندونيسي XL</td><td><input type="number" step="0.01" class="price" value="374"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>اوغاندي ١٥</td><td><input type="number" step="0.01" class="price" value="364"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>اوغاندي ١٨</td><td><input type="number" step="0.01" class="price" value="376"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>فيتنامي جريد اسكنرين ١٨</td><td><input type="number" step="0.01" class="price" value="384"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>هندي روبستا AA</td><td><input type="number" step="0.01" class="price" value="412"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>حبشي لقمتي جريد ٤</td><td><input type="number" step="0.01" class="price" value="388"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>برازيلي روبستا</td><td><input type="number" step="0.01" class="price" value="358"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>برازيلي سانتوتس فاين كاب</td><td><input type="number" step="0.01" class="price" value="544"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>برازيلي ريو ارابيكا ١٥-١٦</td><td><input type="number" step="0.01" class="price" value="432"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>هندي ارابيكا</td><td><input type="number" step="0.01" class="price" value="634"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>كولمبي اسكرين ١٨-١٩</td><td><input type="number" step="0.01" class="price" value="765"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>جواتيمالا</td><td><input type="number" step="0.01" class="price" value="755"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>حبشي هراري</td><td><input type="number" step="0.01" class="price" value="558"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>هندي ميسور</td><td><input type="number" step="0.01" class="price" value="798"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>كيني AAA</td><td><input type="number" step="0.01" class="price" value="798"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>يمني موكا AA+</td><td><input type="number" step="0.01" class="price" value="942"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>بيرو</td><td><input type="number" step="0.01" class="price" value="772"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>كوستاريكي</td><td><input type="number" step="0.01" class="price" value="798"></td><td><input type="number" step="1" class="blend"></td></tr>
+  <tr><td>يمني خولاني</td><td><input type="number" step="0.01" class="price" value="1185"></td><td><input type="number" step="1" class="blend"></td></tr>
+  </tbody>
+
+</table>
+
+<div class="form-group">
+  <label for="totalGrams">Total Blend Weight (grams):</label>
+  <input type="number" id="totalGrams" step="1" value="1000">
+</div>
+
+<div class="form-group">
+  <label for="profitMargin">Profit Margin (%):</label>
+  <input type="number" id="profitMargin" step="1" min="0" max="100" value="0">
+</div>
+
+<button onclick="calculateBlendCost()">Calculate Total Price</button>
+
+<div class="total" id="result"></div>
+
+<script>
+  function calculateBlendCost() {
+    const prices = document.querySelectorAll('.price');
+    const blends = document.querySelectorAll('.blend');
+    const totalGrams = parseFloat(document.getElementById('totalGrams').value);
+    const profitMargin = parseFloat(document.getElementById('profitMargin').value);
+
+    let totalInputGrams = 0;
+    let totalCost = 0;
+
+    for (let i = 0; i < prices.length; i++) {
+      const pricePerKg = parseFloat(prices[i].value) || 0;
+      const grams = parseFloat(blends[i].value) || 0;
+      totalInputGrams += grams;
+      const weightInKg = grams / 1000;
+      totalCost += pricePerKg * weightInKg;
+    }
+
+    if (Math.abs(totalInputGrams - totalGrams) > 0.1) {
+      document.getElementById('result').innerHTML =
+              `<span class="error">Error: Total blend is ${totalInputGrams}g but expected ${totalGrams}g.</span>`;
+      return;
+    }
+
+    const finalPrice = totalCost * (1 + (profitMargin / 100));
+    document.getElementById('result').innerHTML =
+            `Base Cost: $${totalCost.toFixed(2)}<br>
+         Final Price (with ${profitMargin}% profit): <strong>$${finalPrice.toFixed(2)}</strong>`;
+  }
+</script>
+
+</body>
+</html>
