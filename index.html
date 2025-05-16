@@ -129,7 +129,7 @@
 <div class="total" id="result"></div>
 
 <script>
- function calculateBlendCost() {
+function calculateBlendCost() {
   const prices = document.querySelectorAll('.price');
   const blends = document.querySelectorAll('.blend');
   const totalGramsInput = parseFloat(document.getElementById('totalGrams').value);
@@ -146,14 +146,28 @@
     totalCost += pricePerKg * weightInKg;
   }
 
+  if (totalInputGrams === 0) {
+    document.getElementById('result').innerHTML = `<p class="error">Please enter blend weights to calculate the cost.</p>`;
+    return;
+  }
+
   const baseCostPerGram = totalCost / totalInputGrams;
-  const baseCostPerKg = baseCostPerGram * 1000;
-  const finalPricePerKg = baseCostPerKg * (1 + (profitMargin / 100));
+  const finalPricePerGram = baseCostPerGram * (1 + (profitMargin / 100));
+
+  const actualTotalCost = totalCost;
+  const actualFinalPrice = finalPricePerGram * totalInputGrams;
+
+  const costPerKg = baseCostPerGram * 1000;
+  const finalPricePerKg = costPerKg * (1 + (profitMargin / 100));
 
   let resultHTML = `
-    <p>Total blend weight entered: ${totalInputGrams.toFixed(2)} grams</p>
-    <p>Base cost per 1000 grams: ${baseCostPerKg.toFixed(2)} EGP</p>
-    <p>Final price per 1000 grams with ${profitMargin}% profit: ${finalPricePerKg.toFixed(2)} EGP</p>
+    <p><strong>Actual Blend Weight:</strong> ${totalInputGrams.toFixed(2)} grams</p>
+    <p><strong>Base Cost per Gram:</strong> ${baseCostPerGram.toFixed(2)} EGP</p>
+    <p><strong>Total Cost for Actual Weight:</strong> ${actualTotalCost.toFixed(2)} EGP</p>
+    <p><strong>Final Price for Actual Weight with ${profitMargin}% Profit:</strong> ${actualFinalPrice.toFixed(2)} EGP</p>
+    <hr>
+    <p><strong>Total Cost for 1000 Grams:</strong> ${costPerKg.toFixed(2)} EGP</p>
+    <p><strong>Final Price for 1000 Grams with ${profitMargin}% Profit:</strong> ${finalPricePerKg.toFixed(2)} EGP</p>
   `;
 
   if (Math.abs(totalInputGrams - 1000) > 0.1) {
