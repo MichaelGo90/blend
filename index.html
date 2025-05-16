@@ -3,28 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>Blend Coffee Price Calculator</title>
-   <style>
+   
+    <style>
+    :root {
+      --background: #121212;
+      --surface: #1e1e1e;
+      --gold: #d4af37;
+      --text: #e6e1c5;
+      --error: #ff6b6b;
+      --input-bg: #2a2a2a;
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
+      background-color: var(--background);
+      color: var(--text);
       padding: 30px;
     }
 
     h1 {
-      color: #fafafa;
+      color: var(--gold);
       margin-bottom: 20px;
-      border-bottom: 2px solid #444;
+      border-bottom: 2px solid var(--gold);
       padding-bottom: 10px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      background-color: #1e1e1e;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      background-color: var(--surface);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
       margin-bottom: 20px;
-      border-radius: 8px;
+      border: 1px solid var(--gold);
+      border-radius: 10px;
       overflow: hidden;
     }
 
@@ -35,22 +46,24 @@
     }
 
     th {
-      background-color: #333;
-      color: #fff;
+      background-color: #2e2e2e;
+      color: var(--gold);
+      font-weight: 600;
     }
 
     input[type="number"] {
       width: 100px;
       padding: 6px;
-      border: 1px solid #444;
+      border: 1px solid var(--gold);
       border-radius: 6px;
-      background-color: #222;
-      color: #eee;
+      background-color: var(--input-bg);
+      color: var(--text);
     }
 
     label {
       font-weight: 500;
       margin-right: 10px;
+      color: var(--gold);
     }
 
     .form-group {
@@ -58,8 +71,8 @@
     }
 
     button {
-      background-color: #27ae60;
-      color: white;
+      background-color: var(--gold);
+      color: #121212;
       padding: 10px 20px;
       border: none;
       border-radius: 6px;
@@ -69,30 +82,28 @@
     }
 
     button:hover {
-      background-color: #219150;
+      background-color: #c09d2e;
     }
 
     .total {
       margin-top: 20px;
       font-size: 1.2em;
       font-weight: 600;
-      color: #fafafa;
-      background-color: #1e1e1e;
+      background-color: var(--surface);
       padding: 15px;
       border-radius: 8px;
-      border: 1px solid #333;
+      border: 1px solid var(--gold);
     }
 
     .error {
-      color: #ff6b6b;
+      color: var(--error);
       font-weight: bold;
     }
 
     input[type="number"]::placeholder {
-      color: #999;
+      color: #aaa;
     }
-  </style>
-</head>
+  </style></head>
 <body>
 
 <h1>Blend Coffee Price Calculator</h1>
