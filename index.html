@@ -129,34 +129,40 @@
 <div class="total" id="result"></div>
 
 <script>
-  function calculateBlendCost() {
-    const prices = document.querySelectorAll('.price');
-    const blends = document.querySelectorAll('.blend');
-    const totalGrams = parseFloat(document.getElementById('totalGrams').value);
-    const profitMargin = parseFloat(document.getElementById('profitMargin').value);
+ function calculateBlendCost() {
+  const prices = document.querySelectorAll('.price');
+  const blends = document.querySelectorAll('.blend');
+  const totalGramsInput = parseFloat(document.getElementById('totalGrams').value);
+  const profitMargin = parseFloat(document.getElementById('profitMargin').value);
 
-    let totalInputGrams = 0;
-    let totalCost = 0;
+  let totalInputGrams = 0;
+  let totalCost = 0;
 
-    for (let i = 0; i < prices.length; i++) {
-      const pricePerKg = parseFloat(prices[i].value) || 0;
-      const grams = parseFloat(blends[i].value) || 0;
-      totalInputGrams += grams;
-      const weightInKg = grams / 1000;
-      totalCost += pricePerKg * weightInKg;
-    }
-
-    if (Math.abs(totalInputGrams - totalGrams) > 0.1) {
-      document.getElementById('result').innerHTML =
-              `<span class="error">Error: Total blend is ${totalInputGrams}g but expected ${totalGrams}g.</span>`;
-      return;
-    }
-
-    const finalPrice = totalCost * (1 + (profitMargin / 100));
-    document.getElementById('result').innerHTML =
-            `Base Cost: $${totalCost.toFixed(2)}<br>
-         Final Price (with ${profitMargin}% profit): <strong>$${finalPrice.toFixed(2)}</strong>`;
+  for (let i = 0; i < prices.length; i++) {
+    const pricePerKg = parseFloat(prices[i].value) || 0;
+    const grams = parseFloat(blends[i].value) || 0;
+    totalInputGrams += grams;
+    const weightInKg = grams / 1000;
+    totalCost += pricePerKg * weightInKg;
   }
+
+  const baseCostPerGram = totalCost / totalInputGrams;
+  const baseCostPerKg = baseCostPerGram * 1000;
+  const finalPricePerKg = baseCostPerKg * (1 + (profitMargin / 100));
+
+  let resultHTML = `
+    <p>Total blend weight entered: ${totalInputGrams.toFixed(2)} grams</p>
+    <p>Base cost per 1000 grams: ${baseCostPerKg.toFixed(2)} EGP</p>
+    <p>Final price per 1000 grams with ${profitMargin}% profit: ${finalPricePerKg.toFixed(2)} EGP</p>
+  `;
+
+  if (Math.abs(totalInputGrams - 1000) > 0.1) {
+    resultHTML += `<p class="error">Note: The total blend weight is not exactly 1000 grams.</p>`;
+  }
+
+  document.getElementById('result').innerHTML = resultHTML;
+}
+
 </script>
 
 </body>
